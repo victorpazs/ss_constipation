@@ -3,20 +3,14 @@ import { rules } from "../data/rules";
 import { runInferenceEngine } from "../engine/inference";
 import { QuestionStep } from "../components/QuestionStep";
 import { ResultPanel } from "../components/ResultPanel";
-import type { StepNode } from "../types";
 import { Toaster } from "@/components/ui/toaster";
+import startSteps from "../data/steps.json";
+import type { StepNode } from "../types";
 
 function QuestionsPage() {
   const [facts, setFacts] = useState<any>({ etapa: "step1" });
   const [triggered, setTriggered] = useState<string[]>([]);
-  const [steps, setSteps] = useState<StepNode[]>([]);
-
-  useEffect(() => {
-    fetch("src/data/steps.json")
-      .then((res) => res.json())
-      .then((data) => setSteps(data));
-  }, []);
-
+  const steps = startSteps as StepNode[];
   const currentStep = steps.find((s) => s.id === facts.etapa);
 
   function handleSubmit(field: string, value: any) {
