@@ -1,0 +1,93 @@
+[
+  {
+    "id": "step1",
+    "inputType": "number",
+    "prompt": "Há quanto tempo (em semanas) o paciente apresenta o sintoma?",
+    "field": "duracaoSemanas"
+  },
+  {
+    "id": "step2",
+    "inputType": "radio",
+    "prompt": "Qual é o tipo de fezes do paciente de acordo com a Escala de Bristol?",
+    "field": "bristolType",
+    "options": [
+      { "value": 1, "label": "Tipo 1 – bolinhas duras, separadas" },
+      { "value": 2, "label": "Tipo 2 – forma de salsicha, mas grumosa" },
+      { "value": 3, "label": "Tipo 3 – salsicha ou tronco com fissuras" },
+      { "value": 4, "label": "Tipo 4 – salsicha lisa e macia" },
+      { "value": 5, "label": "Tipo 5 – pedaços macios com bordas claras" },
+      { "value": 6, "label": "Tipo 6 – pedaços moles e esponjosos" },
+      { "value": 7, "label": "Tipo 7 – aquoso, sem pedaços sólidos" }
+    ]
+  },
+  {
+    "id": "step3",
+    "inputType": "radio_boolean",
+    "prompt": "A dor abdominal do paciente, se presente, é leve e sem incapacidade para suas atividades diárias?",
+    "field": "dorLeve",
+    "options": [
+      { "value": "sim", "label": "Sim" },
+      { "value": "nao", "label": "Não" }
+    ]
+  },
+  {
+    "id": "step4",
+    "inputType": "radio_boolean",
+    "prompt": "O sintoma ocorre em situações de estresse ou alterações de rotina do paciente (viagens, dieta etc.)?",
+    "field": "situacional",
+    "options": [
+      { "value": "sim", "label": "Sim" },
+      { "value": "nao", "label": "Não" }
+    ]
+  },
+  {
+    "id": "step5",
+    "inputType": "radio_boolean",
+    "prompt": "Há relação clara com alimentação irregular ou ingestão insuficiente do paciente?",
+    "field": "relacaoAlimentacao",
+    "options": [
+      { "value": "sim", "label": "Sim" },
+      { "value": "nao", "label": "Não" }
+    ]
+  },
+  {
+    "id": "step6",
+    "inputType": "radio_boolean",
+    "prompt": "O paciente sente plenitude gástrica ou desconforto no início da evacuação?",
+    "field": "plenitude",
+    "options": [
+      { "value": "sim", "label": "Sim" },
+      { "value": "nao", "label": "Não" }
+    ]
+  },
+  {
+    "id": "step7",
+    "inputType": "radio_boolean",
+    "prompt": "O paciente é criança (<6 anos), idoso frágil, gestante ou lactante?",
+    "field": "pacienteEspecial",
+    "options": [
+      { "value": "sim", "label": "Sim" },
+      { "value": "nao", "label": "Não" }
+    ]
+  },
+  {
+    "id": "step8",
+    "inputType": "radio_boolean",
+    "prompt": "O paciente tem alguma condição (DII, SII, hemorróidas com sangramento, diverticulite etc.)?",
+    "field": "condicaoClinica",
+    "options": [
+      { "value": "sim", "label": "Sim" },
+      { "value": "nao", "label": "Não" }
+    ]
+  },
+  {
+    "id": "step9",
+    "inputType": "radio_boolean",
+    "prompt": "O paciente usa medicamentos constipantes ou já usou laxantes sem orientação?",
+    "field": "usoMedicamentos",
+    "options": [
+      { "value": "sim", "label": "Sim" },
+      { "value": "nao", "label": "Não" }
+    ]
+  }
+]

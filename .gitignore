@@ -1,0 +1,15 @@
+# Root
+node_modules
+.env
+dist
+*.log
+
+# Frontend
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.env*
+
+# Backend
+/backend/node_modules/
+/backend/dist/
+/backend/.env*

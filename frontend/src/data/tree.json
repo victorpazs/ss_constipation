@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "start": "step1",
+  "nodes": {
+    "step1": {
+      "id": "step1",
+      "type": "question",
+      "inputType": "number",
+      "title": "Tempo",
+      "prompt": "Há quanto tempo (em semanas) o paciente apresenta o sintoma?",
+      "field": "duracaoSemanas",
+      "branches": [
+        { "test": { "op": "<=", "value": 2 }, "next": "step2" },
+        { "test": { "op": ">", "value": 2 }, "next": "alert_referir" }
+      ]
+    },
+
+    "step2": {
+      "id": "step2",
+      "type": "question",
+      "inputType": "radio",
+      "title": "Características (Escala de Bristol)",
+      "prompt": "Qual é o tipo de fezes do paciente de acordo com a Escala de Bristol?",
+      "field": "bristolType",
+      "options": [
+        { "value": 1, "label": "Tipo 1 – bolinhas duras, separadas" },
+        { "value": 2, "label": "Tipo 2 – forma de salsicha, mas grumosa" },
+        { "value": 3, "label": "Tipo 3 – salsicha ou tronco com fissuras" },
+        { "value": 4, "label": "Tipo 4 – salsicha lisa e macia" },
+        { "value": 5, "label": "Tipo 5 – pedaços macios com bordas claras" },
+        { "value": 6, "label": "Tipo 6 – pedaços moles e esponjosos" },
+        { "value": 7, "label": "Tipo 7 – aquoso, sem pedaços sólidos" }
+      ],
+      "branches": [
+        { "test": { "op": "<=", "value": 2 }, "next": "step3" },
+        { "test": { "op": ">", "value": 2 }, "next": "alert_referir" }
+      ]
+    },
+
+    "step3": {
+      "id": "step3",
+      "type": "question",
+      "inputType": "radio_boolean",
+      "title": "Gravidade/Intensidade",
+      "prompt": "A dor abdominal do paciente, se presente, é leve e sem incapacidade para suas atividades diárias?",
+      "field": "dorLeve",
+      "branches": [
+        { "test": { "equals": "sim" }, "next": "step4" },
+        { "test": { "equals": "nao" }, "next": "alert_referir" }
+      ]
+    },
+
+    "step4": {
+      "id": "step4",
+      "type": "question",
+      "inputType": "text",
+      "title": "Ambiente/Situação",
+      "prompt": "O sintoma ocorre em situações de estresse ou alterações de rotina do paciente (viagens, dieta etc.)?",
+      "field": "situacional",
+      "branches": [
+        { "test": { "equals": "sim" }, "next": "step5" },
+        { "test": { "equals": "nao" }, "next": "alert_referir" }
+      ]
+    },
+
+    "step5": {
+      "id": "step5",
+      "type": "question",
+      "inputType": "text",
+      "title": "Fatores (agravam/aliviam)",
+      "prompt": "Há relação clara com alimentação irregular ou ingestão insuficiente do paciente?",
+      "field": "relacaoAlimentacao",
+      "branches": [
+        { "test": { "equals": "sim" }, "next": "step6" },
+        { "test": { "equals": "nao" }, "next": "alert_referir" }
+      ]
+    },
+
+    "step6": {
+      "id": "step6",
+      "type": "question",
+      "inputType": "text",
+      "title": "Sinais/Sintomas Associados",
+      "prompt": "O paciente sente plenitude gástrica ou desconforto no início da evacuação?",
+      "field": "plenitude",
+      "branches": [
+        { "test": { "equals": "sim" }, "next": "step7" },
+        { "test": { "equals": "nao" }, "next": "alert_referir" }
+      ]
+    },
+
+    "step7": {
+      "id": "step7",
+      "type": "question",
+      "inputType": "text",
+      "title": "Perfil do Paciente",
+      "prompt": "O paciente é criança (<6 anos), idoso frágil, gestante ou lactante?",
+      "field": "pacienteEspecial",
+      "branches": [
+        { "test": { "equals": "nao" }, "next": "step8" },
+        { "test": { "equals": "sim" }, "next": "alert_referir" }
+      ]
+    },
+
+    "step8": {
+      "id": "step8",
+      "type": "question",
+      "inputType": "text",
+      "title": "História Clínica",
+      "prompt": "O paciente tem alguma condição (DII, SII, hemorróidas com sangramento, diverticulite etc.)?",
+      "field": "condicaoClinica",
+      "branches": [
+        { "test": { "equals": "nao" }, "next": "step9" },
+        { "test": { "equals": "sim" }, "next": "alert_referir" }
+      ]
+    },
+
+    "step9": {
+      "id": "step9",
+      "type": "question",
+      "inputType": "text",
+      "title": "História Farmacoterapêutica",
+      "prompt": "O paciente usa medicamentos constipantes ou já usou laxantes sem orientação?",
+      "field": "usoMedicamentos",
+      "branches": [
+        { "test": { "equals": "nao" }, "next": "tratamento_nao_farmacologico" },
+        { "test": { "equals": "sim" }, "next": "alert_referir" }
+      ]
+    },
+
+    "tratamento_nao_farmacologico": {
+      "id": "tratamento_nao_farmacologico",
+      "type": "action",
+      "title": "Tratamento Não Farmacológico",
+      "autoAdvance": true,
+      "steps": [
+        "Ingestão de líquidos: 1,5 – 2 L/dia",
+        "Fibras: 20 – 35 g/dia (adultos); 5 – 10 g/dia (crianças ≥ 2 anos)",
+        "Exercícios físicos regulares",
+        "Estímulo à evacuação (horários e postura)"
+      ],
+      "next": "tratamento_farmacologico"
+    },
+
+    "tratamento_farmacologico": {
+      "id": "tratamento_farmacologico",
+      "type": "action",
+      "title": "Tratamento Farmacológico (MIPs)",
+      "autoAdvance": true,
+      "order": [
+        "Laxantes formadores de massa",
+        "Surfactantes/emolientes",
+        "Agentes osmóticos",
+        "Laxantes estimulantes/irritantes"
+      ],
+      "note": "Usar até alívio, por no máximo 7 dias.",
+      "next": "avaliacao_resultados"
+    },
+
+    "avaliacao_resultados": {
+      "id": "avaliacao_resultados",
+      "type": "action",
+      "title": "Avaliação dos Resultados",
+      "terminal": true,
+      "options": [
+        { "answer": "remissao", "description": "Remissão da constipação" },
+        {
+          "answer": "diminuicao",
+          "description": "Diminuição da constipação. Acompanhar de perto!"
+        },
+        { "answer": "persiste", "description": "Constipação persiste" },
+        { "answer": "piorou", "description": "Constipação piorou" }
+      ]
+    },
+
+    "alert_referir": {
+      "id": "alert_referir",
+      "type": "alert",
+      "title": "Encaminhar",
+      "description": "Identificado sinal de alerta. Encaminhar o paciente a outro profissional ou serviço de saúde."
+    }
+  }
+}

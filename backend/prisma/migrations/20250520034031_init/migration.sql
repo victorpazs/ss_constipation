@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "Assessment" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "answers" JSONB NOT NULL,
+    "rules" JSONB NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
